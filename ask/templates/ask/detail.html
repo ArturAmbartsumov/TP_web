@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Ask-artur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le styles -->
+	{% load staticfiles %}
+	<link href="{{STATIC_URL}}bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}css/ask-artur.css" rel="stylesheet">
+  </head>
+
+<body>
+	<div class="container myclass">
+<!Главное меню>
+<!========================================================================================>
+		<div class="navbar">
+				<div class="navbar-inner">
+					<div class="row-fluid">
+						{% if user.is_authenticated and user.username != "admin" %} <!Если авторизирован>
+						<div class="span10">
+							<a class="brand" href="{% url 'questions' %}">Ask-artur</a>
+						</div>
+						<div class="span1">
+							<a href="{% url 'userpage' user.customuser.id %}">{{ user.username }}</a>
+						</div>
+						<div class="span1">
+							<a href="{% url 'logout' %}">Logout</a>
+						</div>
+						{% else %} <!Если не авторизирован>
+						<div class="span10">
+							<a class="brand" href="{% url 'questions' %}">Ask-artur</a>
+						</div>
+						{% endif %}
+					</div>
+			</div>
+		</div>	
+
+<!Основной контент>
+<!========================================================================================>
+		<div class="row-fluid">
+
+		<!Блок с вопросами>
+		<!========================================================================================>
+			<div class="span9">
+				<div class="qField">
+					<ul class="nav nav-tabs">
+        				<li>
+        					<a href="{% url 'questions' %}">Вернуться к листингу</a>
+        				</li>
+        				{% if user.is_authenticated %}
+        				<div class="btn-group qField_askButton">
+        					<a data-toggle="modal" href="#QuestionModal" class="btn btn-success">Ответить</a>
+        				</div>
+        				{% endif %}
+        			</ul>
+
+					{% if message %}
+        				{% if flag %}
+        				<span class="label label-success message">{{ message }}</span>
+        				{% else %}
+        				<span class="label label-important message">{{ message }}</span>
+        				{% endif %}
+        			{% endif %}
+
+					<!Поле вопроса>
+					<!========================================================================================>				
+					<div class="row-fluid qField_question">
+
+						<!Голосовалка>
+						<!========================================================================================>
+						<div class="span2">
+							<p class="qField_question_vote_username">
+								Автор: <a href="{% url 'userpage' question.customuser.id %}">{{ question.customuser.user.username }}</a>
+							</p>
+							<div class="qField_question_vote">
+								<div vertical-align="middle" align="center" class="qField_question_vote_value">
+									{{ question.rating }}
+								</div>
+								<div align="center" class="qField_question_vote_arrow">
+									<i  icon-circle-arrow-up></i>
+									<div class="btn-group btn-group-vertical">
+        								<a class="btn" href="{% url 'questionlike' question.id %}"><i class="icon-circle-arrow-up"></i></a>
+        								<a class="btn" href="{% url 'questiondislike' question.id %}"><i class="icon-circle-arrow-down"></i></a>
+        							</div>
+								</div>
+							</div>
+						</div>
+						<!CСам вопрос с заголовком и нижним меню>
+						<!========================================================================================>
+						<div class="span10">
+							<div class="qField_question_title">
+							<h3>{{ question.title }}</h3>
+							</div>
+							<div class="qField_question_text">
+								<p>{{ question.question_text }}</p>
+							</div>
+							<div class="row-fluid">
+								<div class="span3 qField_question_readAnsvers">
+									<a href="{% url 'detail' question.id %}">Читать ответы</a>
+								</div>
+								<div class="span2 qField_question_like">
+									<a href="{% url 'questionlike' question.id %}">Like</a>
+								</div>
+								<div class="span2 qField_question_dislike">
+									<a href="{% url 'questiondislike' question.id %}">Dislike</a>
+								</div>
+								<div class="span3 qField_question_dislike">
+									{{ question.pub_data }}
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!Лучшие ответ>
+					<!========================================================================================>
+					{% if best_answer %}
+					<h2>Лучшие ответы</h2>
+					{% for answer in best_answer %}
+					<div class="row-fluid qField_answer" >
+						<div class="span12">
+							<div class="qField_answer_text">
+								<p>{{ answer.ansver_text }}</p>
+								<div class="row-fluid">
+									<div class="span2 qField_question_readAnsvers">
+										<p class="qField_question_vote_username">
+											Автор: <a href="{% url 'userpage' answer.customuser.id %}">{{ answer.customuser.user.username }}</a>
+										</p>
+									</div>
+									<div class="span2 qField_question_ansver">
+										<a href="#">Коментарий</a>
+									</div>
+									<div class="span1 qField_question_like">
+										<a href="{% url 'answerlike' answer.id %}">Like</a>
+									</div>
+									<div class="span1 qField_question_dislike">
+										<a href="{% url 'answerdislike' answer.id %}">Dislike</a>
+									</div>
+									<div class="span1 qField_question_dislike">
+										{% if answer.rating >= 0 %}
+											{% if answer.rating > 0 %}
+												<span class="label label-success">{{ answer.rating }}</span>
+											{% else %}
+												<span class="label">{{ answer.rating }}</span>
+											{% endif %}
+										{% else %}
+										<span class="label label-important">{{ answer.rating }}</span>
+										{% endif %}
+									</div>
+									<div class="span3 qField_question_dislike">
+										{{ answer.pub_data }}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					{% endif %}
+
+					<!Ответы>
+					<!========================================================================================>
+					{% if answer_list %} <!Если ответы есть>
+					<h2>Ответы</h2>
+					{% for answer in answer_list %}
+					{% if not answer.flag %}
+					<div class="row-fluid qField_answer" >
+						<div class="span12">
+							<div class="qField_answer_text">
+								<p>{{ answer.ansver_text }}</p>
+								<div class="row-fluid">
+									<div class="span2 qField_question_readAnsvers">
+										<p class="qField_question_vote_username">
+											Автор: <a href="{% url 'userpage' answer.customuser.id %}">{{ answer.customuser.user.username }}</a>
+										</p>
+									</div>
+									<div class="span2 qField_question_ansver">
+										<a href="#">Коментарий</a>
+									</div>
+									<div class="span1 qField_question_like">
+										<a href="{% url 'answerlike' answer.id %}">Like</a>
+									</div>
+									<div class="span1 qField_question_dislike">
+										<a href="{% url 'answerdislike' answer.id %}">Dislike</a>
+									</div>
+									<div class="span1 qField_question_dislike">
+										{% if answer.rating >= 0 %}
+											{% if answer.rating > 0 %}
+												<span class="label label-success">{{ answer.rating }}</span>
+											{% else %}
+												<span class="label">{{ answer.rating }}</span>
+											{% endif %}
+										{% else %}
+										<span class="label label-important">{{ answer.rating }}</span>
+										{% endif %}
+									</div>
+									<div class="span3 qField_question_dislike">
+										{{ answer.pub_data }}
+									</div>
+									<!Если авторизирован и вопрос принадлежит пользователю>
+									{% if user.is_authenticated and user.customuser.id == answer.question.customuser.id %} 
+									 <div class="btn-group qField_askButton">
+        								<a class="btn btn-success" href="{% url 'goodanswer' answer.id %}">Хороший ответ!</a>
+        							</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					{% endfor %}
+
+						<ul class="pager">
+					    	{% if answer_list.has_previous %}
+    							<li><a href="?page={{ answer_list.previous_page_number }}">Назад</a></li>
+    						{% endif %}
+    						<li>Страница {{ answer_list.number }} из {{ answer_list.paginator.num_pages }}<li>
+    						{% if answer_list.has_next %}
+    							<li><a href="?page={{ answer_list.next_page_number }}">Вперед</a></li>
+    						{% endif %}
+    					</ul>
+
+					{% else %} <!Если список вопросов пуст>
+					<h2>На этот вопрос никто не ответил((</h2>
+					{% endif %}
+				</div>
+			</div>
+
+		<!Блок с поиском и облаком тегов>
+		<!========================================================================================>
+			<div class="span3">
+			
+				<form class="form-search">
+    				<input type="text" class="input-medium search-query" placeholder="Введите текст…">
+    				<button type="submit" class="btn"><i class="icon-search"></i>Найти</button>
+    			</form>			
+			</div>
+		</div>
+	</div>
+
+	<!Всплывающее окно ответа>
+	<!========================================================================================>
+	<div id="QuestionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3 id="myModalLabel">Ответ</h3>
+		</div>
+		<form class="form" action="{% url 'newanswer' question.id %}" method="post">
+		{% csrf_token %}
+		<div class="modal-body">
+    				<label class="control-label" for="inputAnswer">Текст ответа</label>
+    				<div class="controls">
+    					<textarea name="ansver_text" rows="3" id="inputAnswer" type="test" placeholder="Ответ"></textarea>
+    				</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal">Закрыть</button>
+			<button type="submit" class="btn btn-primary">Сохранить</button>
+		</div>
+		</form>
+	</div>
+	
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-transition.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-modal.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-alert.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-dropdown.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-scrollspy.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-tab.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-tooltip.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-popover.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-button.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-collapse.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-carousel.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-typeahead.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+.myclass {
+	background-color: skyblue;
+	}
+		
+.qField {
+	margin-bottom: 1%;
+	margin-left: 1%;
+	margin-top: 1%;
+	padding: 1%;
+	border: 2px double black;
+	background-color: whitesmoke;
+	}
+	
+.qField_nav {
+	background-color: black;
+	}
+	
+.qField_askButton {
+	float: right;
+	}
+
+.qField_question {
+	border: 2px solid black;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	}
+
+.qField_question_vote {
+	height: 60px;
+	margin-top: 30px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	}
+.qField_question_vote_value {
+	float: left;	
+	width: 48%;
+	height: 30px;
+	font-size: 360%;
+	padding-top: 20px;
+	margin-top: 2px;
+	margin-left: 4%;
+	margin-right: 4%;
+	border: 2px double black;
+	}
+	
+.qField_question_vote_arrow {
+	float: right;
+	width: 40%;
+	}
+
+.qField_question_title{
+	word-wrap: break-word;
+	}
+	
+.qField_question_text{
+	word-wrap: break-word;
+	}
+
+.qField_question_readAnsvers{
+	border-right: 2px double black;
+	margin-bottom: 5px;   
+   }
+
+.qField_question_ansver{
+	border-right: 2px double black;
+	margin-bottom: 5px;
+	}
+
+.qField_question_like{
+	border-right: 2px double black;
+	margin-bottom: 5px;
+	}
+	
+.qField_question_dislike{
+	margin-bottom: 5px;
+	}
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+

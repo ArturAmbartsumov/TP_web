@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Ask-artur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le styles -->
+    
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/ask-artur.css" rel="stylesheet">
+
+  </head>
+  
+<body>
+
+
+	<div class="container myclass">
+<!Главное меню>
+<!========================================================================================>
+		<div class="navbar">
+				<div class="navbar-inner">
+					<div class="row-fluid">
+						<div class="span10">
+							<a class="brand" href="#">Ask-artur</a>
+						</div>
+						<div class="span1">
+							<p>Pupkin</p>
+						</div>
+						<div class="span1">
+							<a href="#">Logout</a>
+						</div>
+					</div>
+			</div>
+		</div>	
+<!Основной контент>
+<!========================================================================================>
+		<div class="row-fluid">
+
+		<!Блок с вопросами>
+		<!========================================================================================>
+			<div class="span9">
+				<div class="qField">
+				
+					<ul class="nav nav-tabs">
+        				<li class="active">
+        					<a href="#">Новые</a>
+        				</li>
+        				<li><a href="#">Популярные</a></li>
+        				
+        				<div class="btn-group qField_askButton">
+        						<a class="btn btn-success" href="#">Задать вопрос!</a>
+        				</div>
+        			</ul>
+        			
+					<!Поле вопроса>
+					<!========================================================================================>				
+					<div class="row-fluid qField_question">
+						<!Голосовалка>
+						<!========================================================================================>
+						<div class="span2">
+							
+							<div class="qField_question_vote">
+								<div vertical-align="middle" align="center" class="qField_question_vote_value">
+									0
+								</div>
+								<div align="center" class="qField_question_vote_arrow">
+									<i  icon-circle-arrow-up></i>
+									<div class="btn-group btn-group-vertical">
+        								<a class="btn" href="#"><i class="icon-circle-arrow-up"></i></a>
+        								<a class="btn" href="#"><i class="icon-circle-arrow-down"></i></a>
+        							</div>
+								</div>
+							</div>
+						</div>
+						<!CСам вопрос с заголовком и нижним меню>
+						<!========================================================================================>
+						<div class="span10">
+							<div class="qField_question_title"><h3>Question Title</h3></div>
+							<div class="qField_question_text">
+								<p>Свойство word-wrap указывает, переносить или нет длинные слова, которые не помещаются по ширине в заданную область. Данное свойство носит черновой характер и при валидации документа на CSS3 выдает ошибку.</p>
+							</div>
+							<div class="row-fluid">
+								<div class="span3 qField_question_readAnsvers">
+									<a href="#">Читать ответы</a>
+								</div>
+								<div class="span3 qField_question_ansver">
+									<a href="#">Ответить</a>
+								</div>
+								<div class="span3 qField_question_like">
+									<a href="#">Like</a>
+								</div>
+								<div class="span3 qField_question_dislike">
+									<a href="#">Dislike</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!Поле вопроса>
+					<!========================================================================================>				
+					<div class="row-fluid qField_question">
+						<!Голосовалка>
+						<!========================================================================================>
+						<div class="span2">
+							
+							<div class="qField_question_vote">
+								<div vertical-align="middle" align="center" class="qField_question_vote_value">
+									0
+								</div>
+								<div align="center" class="qField_question_vote_arrow">
+									<i  icon-circle-arrow-up></i>
+									<div class="btn-group btn-group-vertical">
+        								<a class="btn" href="#"><i class="icon-circle-arrow-up"></i></a>
+        								<a class="btn" href="#"><i class="icon-circle-arrow-down"></i></a>
+        							</div>
+								</div>
+							</div>
+						</div>
+						<!CСам вопрос с заголовком и нижним меню>
+						<!========================================================================================>
+						<div class="span10">
+							<div class="qField_question_title"><h3>Question Title</h3></div>
+							<div class="qField_question_text">
+								<p>Свойство word-wrap указывает, переносить или нет длинные слова, которые не помещаются по ширине в заданную область. Данное свойство носит черновой характер и при валидации документа на CSS3 выдает ошибку.</p>
+							</div>
+							<div class="row-fluid">
+								<div class="span3 qField_question_readAnsvers">
+									<a href="#">Читать ответы</a>
+								</div>
+								<div class="span3 qField_question_ansver">
+									<a href="#">Ответить</a>
+								</div>
+								<div class="span3 qField_question_like">
+									<a href="#">Like</a>
+								</div>
+								<div class="span3 qField_question_dislike">
+									<a href="#">Dislike</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!Поле вопроса>
+					<!========================================================================================>				
+					<div class="row-fluid qField_question">
+						<!Голосовалка>
+						<!========================================================================================>
+						<div class="span2">
+							
+							<div class="qField_question_vote">
+								<div vertical-align="middle" align="center" class="qField_question_vote_value">
+									0
+								</div>
+								<div align="center" class="qField_question_vote_arrow">
+									<i  icon-circle-arrow-up></i>
+									<div class="btn-group btn-group-vertical">
+        								<a class="btn" href="#"><i class="icon-circle-arrow-up"></i></a>
+        								<a class="btn" href="#"><i class="icon-circle-arrow-down"></i></a>
+        							</div>
+								</div>
+							</div>
+						</div>
+						<!CСам вопрос с заголовком и нижним меню>
+						<!========================================================================================>
+						<div class="span10">
+							<div class="qField_question_title"><h3>Question Title</h3></div>
+							<div class="qField_question_text">
+								<p>Свойство word-wrap указывает, переносить или нет длинные слова, которые не помещаются по ширине в заданную область. Данное свойство носит черновой характер и при валидации документа на CSS3 выдает ошибку.</p>
+							</div>
+							<div class="row-fluid">
+								<div class="span3 qField_question_readAnsvers">
+									<a href="#">Читать ответы</a>
+								</div>
+								<div class="span3 qField_question_ansver">
+									<a href="#">Ответить</a>
+								</div>
+								<div class="span3 qField_question_like">
+									<a href="#">Like</a>
+								</div>
+								<div class="span3 qField_question_dislike">
+									<a href="#">Dislike</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+
+			</div>
+
+		<!Блок с поиском и облаком тегов>
+		<!========================================================================================>
+			<div class="span3">
+			
+				<form class="form-search">
+    				<input type="text" class="input-medium search-query" placeholder="Введите текст…">
+    				<button type="submit" class="btn"><i class="icon-search"></i>Найти</button>
+    			</form>
+						
+			</div>
+		</div>
+
+		
+	</div>
+	
+
+
+	
+	
+
+    <a href="#myModal" role="button" class="btn" data-toggle="modal">Запустить демонстрацию модального элемента</a>
+     
+
+    <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+    <button type="button"class="close" data-dismiss="modal" aria-hidden="true">?</button>
+    <h3 id="myModalLabel">Заголовок модального элемента</h3>
+    </div>
+    <div class="modal-body">
+    <p>Некое изящное тело…</p>
+    </div>
+    <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
+    <button class="btn btn-primary">Сохранить изменения</button>
+    </div>
+    </div>
+
+	
+	<script src="Bootstrap/js/jquery.js"></script>
+	<script src="Bootstrap/js/bootstrap.js"></script>
+	<script src="Bootstrap/js/bootstrap-transition.js"></script>
+	<script src="Bootstrap/js/bootstrap-modal.js"></script>
+	<script src="Bootstrap/js/bootstrap-alert.js"></script>
+	<script src="Bootstrap/js/bootstrap-dropdown.js"></script>
+	<script src="Bootstrap/js/bootstrap-scrollspy.js"></script>
+	<script src="Bootstrap/js/bootstrap-tab.js"></script>
+	<script src="Bootstrap/js/bootstrap-tooltip.js"></script>
+	<script src="Bootstrap/js/bootstrap-popover.js"></script>
+	<script src="Bootstrap/js/bootstrap-button.js"></script>
+	<script src="Bootstrap/js/bootstrap-collapse.js"></script>
+	<script src="Bootstrap/js/bootstrap-carousel.js"></script>
+	<script src="Bootstrap/js/bootstrap-typeahead.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

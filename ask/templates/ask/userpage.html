@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Ask-artur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le styles -->
+	{% load staticfiles %}
+	<link href="{{STATIC_URL}}bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}css/ask-artur.css" rel="stylesheet">
+
+  </head>
+  
+<body>
+	<div class="container myclass">
+<!Главное меню>
+<!========================================================================================>
+		<div class="navbar">
+				<div class="navbar-inner">
+					<div class="row-fluid">
+						{% if user.is_authenticated and user.username != "admin" %} <!Если авторизирован>
+						<div class="span10">
+							<a class="brand" href="{% url 'questions' %}">Ask-artur</a>
+						</div>
+						<div class="span1">
+							<a href="{% url 'userpage' user.customuser.id %}">{{ user.username }}</a>
+						</div>
+						<div class="span1">
+							<a href="{% url 'logout' %}">Logout</a>
+						</div>
+						{% else %} <!Если не авторизирован>
+						<div class="span10">
+							<a class="brand" href="{% url 'questions' %}">Ask-artur</a>
+						</div>
+						{% endif %}
+					</div>
+			</div>
+		</div>	
+
+<!Основной контент>
+<!========================================================================================>
+		<div class="row-fluid">
+
+		<!Блок с вопросами>
+		<!========================================================================================>
+			<div class="span9">
+				<div class="qField">
+					<ul class="nav nav-tabs">
+        				<li>
+        					<a href="{% url 'questions' %}">Вернуться к листингу</a>
+        				</li>
+        			</ul>
+
+        			{% if message %}
+        				{% if flag %}
+        				<span class="label label-success message">{{ message }}</span>
+        				{% else %}
+        				<span class="label label-important message">{{ message }}</span>
+        				{% endif %}
+        			{% endif %}
+
+					<!Поле вопроса>
+					<!========================================================================================>		
+					{% if question_list %} <!Если вопросы есть>
+						{% if user.customuser == customuser %}
+							<h2>Ваши вопросы</h2>
+						{% else %}
+							<h2>Вопросы пользователя <a href="{% url 'userpage' customuser.id %}">{{ customuser.user.username }}</a></h2>
+						{% endif %}
+					{% for question in question_list %}
+					<div class="row-fluid qField_question">
+						<!CСам вопрос с заголовком и нижним меню>
+						<!========================================================================================>
+						<div class="span12 qField_answer_text">
+							<div class="qField_question_title">
+							<h3>{{ question.title }}</h3>
+							</div>
+							<div class="qField_question_text">
+								<p>{{ question.question_text }}</p>
+							</div>
+							<div class="row-fluid">
+								<div class="span3 qField_question_readAnsvers">
+									<a href="/question/{{ question.id }}/">Читать ответы</a>
+								</div>
+								{% if user.customuser == customuser %}
+								<div class="span3 qField_question_ansver">
+									<a href="#">Редактировать</a>
+								</div>
+								<div class="span3 qField_question_ansver">
+									<a href="#">Удалить</a>
+								</div>
+								{% endif %}
+								<div class="span3 qField_question_dislike">
+									{{ question.pub_data }}
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					{% else %} <!Если список вопросов пуст>
+					<h2>Вы не задали ни один вопрос!</h2>
+					{% endif %}
+					
+					<!Ответы>
+					<!========================================================================================>
+					{% if answer_list %} <!Если ответы есть>
+					<h2>Ответы</h2>
+					{% for answer in answer_list %}
+					<div class="row-fluid qField_answer" >
+						<div class="span12">
+							<div class="qField_answer_text">
+								<p>{{ answer.ansver_text }}</p>
+								<div class="row-fluid">
+									<div class="span3 qField_question_readAnsvers">
+										<p class="qField_question_vote_username">
+											Автор вопроса: <a href="{% url 'userpage' answer.question.customuser.id %}">{{ answer.question.customuser.user.username }}</a>
+										</p>
+									</div>
+									<div class="span2 qField_question_ansver">
+										<a href="{% url 'detail' answer.question.id %}">Вопрос</a>
+									</div>
+									<div class="span3 qField_question_dislike">
+										{{ answer.pub_data }}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					{% else %} <!Если список ответов пуст>
+					<h2>Вы не ответили ни на один вопрос!</h2>
+					{% endif %}
+				</div>
+			</div>
+
+		<!Блок с поиском и облаком тегов>
+		<!========================================================================================>
+			<div class="span3">
+			
+				<form class="form-search">
+    				<input type="text" class="input-medium search-query" placeholder="Введите текст…">
+    				<button type="submit" class="btn"><i class="icon-search"></i>Найти</button>
+    			</form>			
+			</div>
+		</div>
+	</div>
+
+
+
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-transition.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-modal.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-alert.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-dropdown.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-scrollspy.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-tab.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-tooltip.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-popover.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-button.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-collapse.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-carousel.js"></script>
+	<script src="{{STATIC_URL}}bootstrap/js/bootstrap-typeahead.js"></script>
+</body>
+</html>
